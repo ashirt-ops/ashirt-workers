@@ -42,7 +42,6 @@ jobs:
         uses: docker/build-push-action@v5.1.0
         with:
           context: workers/${{ matrix.service }}
-          file: workers/${{ matrix.service }}/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           platforms: linux/amd64
@@ -53,7 +52,6 @@ jobs:
         uses: docker/build-push-action@v5.1.0
         with:
           context: workers/${{ matrix.service }}
-          file: Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}, ashirt/${{ matrix.service }}:latest #Add latest tag for main
           labels: ${{ steps.docker_meta.outputs.labels }}
           platforms: linux/amd64
