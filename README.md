@@ -1,6 +1,6 @@
 # ASHIRT Workers
 
-Adversary Simulators High-Fidelity Intelligence and Reporting Toolkit. This repo contains only the enhancement workers ASHIRT. You can find the ASHIRT server [here](https://www.github.com/ashirt-ops/ashirt-server), and the client [here](https://www.github.com/ashirt-ops/ashirt).
+Adversary Simulators High-Fidelity Intelligence and Reporting Toolkit. This repo contains only the enhancement workers for ASHIRT. You can find the ASHIRT server [here](https://www.github.com/ashirt-ops/ashirt-server), and the client [here](https://www.github.com/ashirt-ops/ashirt).
 
 ## Table of Contents
 
