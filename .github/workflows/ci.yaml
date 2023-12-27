@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v5.1.0
         with:
           context: workers/${{ matrix.service }}
-          file: Dockerfile
+          file: workers/${{ matrix.service }}/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           platforms: linux/amd64
