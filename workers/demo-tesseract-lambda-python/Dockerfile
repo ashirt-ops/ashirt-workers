@@ -5,10 +5,10 @@ RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.
     && yum install -y \
     tesseract
 
-COPY ./requirements.txt  .
+COPY requirements.txt  .
 RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 
-COPY ./app ${LAMBDA_TASK_ROOT}/
+COPY app ${LAMBDA_TASK_ROOT}/
 
 # RUN npm install
 
