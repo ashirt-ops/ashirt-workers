@@ -56,5 +56,5 @@ jobs:
           context: workers/${{ matrix.service }}
           tags: ${{ steps.docker_meta.outputs.tags }}, ashirt/${{ matrix.service }}:latest #Add latest tag for main
           labels: ${{ steps.docker_meta.outputs.labels }}
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
