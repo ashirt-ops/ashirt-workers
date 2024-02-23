@@ -13,7 +13,8 @@ COPY package.json ${LAMBDA_TASK_ROOT}
 
 RUN npm install
 
-RUN yum -y remove python3 binutils \
-    && yum -y --setopt=groupremove_leaf_only=1 groupremove 'Development Tools'
+FROM public.ecr.aws/lambda/nodejs:16
+
+COPY --from=0 ${LAMBDA_TASK_ROOT} ${LAMBDA_TASK_ROOT}
 
 CMD ["app.handler"]
