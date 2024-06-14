@@ -54,7 +54,7 @@ def process_content(body: EvidenceCreatedBody):
     evidence_content = ashirt_svc.get_evidence_content(
         body.operation_slug, body.evidence_uuid, 'media')
     with open("image.png", "wb") as f:
-        f.write(io.BytesIO(evidence_content).getbuffer())
+        f.write(io.BytesIO(evidence_content).getbuffer()) # Onnxruntime doesn't currently support loading an image from bytes, so we have to write to disk. 
 
     img = og.Images.open("image.png")  # Directly assign img variable
     default_questions = [
@@ -64,9 +64,10 @@ def process_content(body: EvidenceCreatedBody):
         "What does the image say?"
     ]
     questions = os.environ.get('VISION_QUESTIONS', ','.join(default_questions))
-    questions = qustions.split(',') # Convert question(s) to a list
+    questions = questions.split(',') # Convert question(s) to a list
 
     resp = []
     for q in questions:
         resp.append(do_ai(question=q,image=img)) # Run inference for each question
-    return '\n\n'.join(resp)
+    chunks = [f'Q:{x[0]}\nA:{x[1]}\n' for x in zip(questions,resp)]
+    return '\n'.join(chunks)
