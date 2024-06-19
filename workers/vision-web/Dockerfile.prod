@@ -1,8 +1,9 @@
 FROM --platform=linux/amd64 python:3.12-slim AS builder
 
 WORKDIR /build
-COPY Pipfile.lock Pipfile ./
 
+COPY Pipfile.lock Pipfile ./
+RUN pip install --user pipenv
 RUN /root/.local/bin/pipenv requirements > requirements.txt
 ###
 
@@ -15,7 +16,7 @@ COPY --from=builder /build/model/ .
 # Install other dependencies here #
 ###################################
 
-RUN pip install -r  requirements.txt
+RUN pip install -r requirements.txt
 RUN pip install --pre onnxruntime-genai numpy huggingface_hub
 # Download the required model components
 RUN huggingface-cli download microsoft/Phi-3-vision-128k-instruct-onnx-cpu --include cpu-int4-rtn-block-32-acc-level-4/* --local-dir model/
