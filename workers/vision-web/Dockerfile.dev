@@ -19,7 +19,7 @@ RUN /root/.local/bin/pipenv run pip install --pre onnxruntime-genai numpy
 
 ENV FLASK_APP src/wsgi.py
 ENV FLASK_DEBUG 1
-ENV FLAKS_ENV=developement
+ENV FLASK_ENV=developement
 
 EXPOSE 80
 
