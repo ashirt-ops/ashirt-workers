@@ -4,6 +4,7 @@ import flask
 import os
 import json
 import logging
+import base64
 
 import io
 from typing import Tuple
@@ -26,13 +27,18 @@ def ping():
 
 @app.route('/invocations', methods=['POST'])
 def transformation():
-    
     #Process input
     input_json = flask.request.get_json()
-    resp = input_json['input']
-    
+    question = input_json.get('input',None)
+    image = input_json.get('image',None)
+    if not question:
+        return flask.Response(response=json.dumps({'output':'error: need to supply input text'}), status=400, mimetype='application/json')
+    temp_image_path = f"/tmp/{uuid.uuid4()}.png"  # Generate a unique name for the image file in /tmp directory
+    with open(temp_image_path, "wb") as f:
+        f.write(b64.b64decode(image))
+    img = og.Images.open(temp_image_path)
     #AI
-    results = do_ai(resp)
+    results = do_ai(question, img)
 
     # Transform predictions to JSON
     result = {
@@ -86,10 +92,6 @@ def do_ai(question, image=None):
         generated_text += decoded_text
         # Print each token to the console as it is generated
         print(decoded_text, end='', flush=True)
-
-    # Print some extra newlines for readability
-    for _ in range(3):
-        print()
 
     # Strip any leading spaces from the response
     generated_text = generated_text.replace('</s>', '')
