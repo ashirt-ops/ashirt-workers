@@ -23,7 +23,7 @@ RUN huggingface-cli download microsoft/Phi-3-vision-128k-instruct-onnx-cpu --inc
 # COPY bin/docker_start.sh ./start.sh
 COPY src .
 
-EXPOSE 80
+EXPOSE 8080
 
 # Run as Alpine's guest user
 USER 405
@@ -34,4 +34,4 @@ CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", \
      "--workers=1", "--worker-class=gthread", \
      "--log-file=-", \
      "--timeout=600", \
-     "-b", "0.0.0.0:80", "wsgi:app"]
+     "-b", "0.0.0.0:8080", "wsgi:app"]

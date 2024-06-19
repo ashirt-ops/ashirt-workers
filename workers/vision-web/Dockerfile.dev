@@ -21,10 +21,10 @@ ENV FLASK_APP src/wsgi.py
 ENV FLASK_DEBUG 1
 ENV FLASK_ENV=developement
 
-EXPOSE 80
+EXPOSE 8080
 
 COPY src ./src/
 
 CMD ["/root/.local/bin/pipenv", "run", \
      "flask", "run", \
-     "--host=0.0.0.0", "--port=80"]
+     "--host=0.0.0.0", "--port=8080"]
