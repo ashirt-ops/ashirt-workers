@@ -33,12 +33,15 @@ def transformation():
     image = input_json.get('image',None)
     if not question:
         return flask.Response(response=json.dumps({'output':'error: need to supply input text'}), status=400, mimetype='application/json')
-    temp_image_path = f"/tmp/{uuid.uuid4()}.png"  # Generate a unique name for the image file in /tmp directory
-    with open(temp_image_path, "wb") as f:
-        f.write(b64.b64decode(image))
-    img = og.Images.open(temp_image_path)
-    #AI
-    results = do_ai(question, img)
+    if image:
+        temp_image_path = f"/tmp/{uuid.uuid4()}.png"  # Generate a unique name for the image file in /tmp directory
+        with open(temp_image_path, "wb") as f:
+            f.write(b64.b64decode(image))
+        img = og.Images.open(temp_image_path)
+        #AI
+        results = do_ai(question, img)
+    else:
+        results = do_ai(question)
 
     # Transform predictions to JSON
     result = {
