@@ -4,7 +4,7 @@ import flask
 import os
 import json
 import logging
-import base64
+import base64 as b64
 
 import io
 from typing import Tuple
