@@ -82,9 +82,9 @@ def do_ai(question, image=None):
 
         new_token = generator.get_next_tokens()[0]
         decoded_text = tokenizer_stream.decode(new_token)
-       # Add each new token to the response string
+        # Add each new token to the response string
         generated_text += decoded_text
-       # Print each token to the console as it is generated
+        # Print each token to the console as it is generated
         print(decoded_text, end='', flush=True)
 
     # Print some extra newlines for readability
@@ -92,10 +92,10 @@ def do_ai(question, image=None):
         print()
 
     # Strip any leading spaces from the response
-    generated_text = generated_text.replace(' ', '')
+    generated_text = generated_text.replace('</s>', '')
 
     # Delete the generator object to free resources
     del generator
 
-   # Return the complete response string
+    # Return the complete response string
     return generated_text
