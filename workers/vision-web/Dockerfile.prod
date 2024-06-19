@@ -31,7 +31,7 @@ USER 405
 # some guidance on using gunicorn in containers:
 # https://pythonspeed.com/articles/gunicorn-in-docker/
 CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", \
-     "--workers=1", "--threads=2", "--worker-class=gthread", \
+     "--workers=1", "--worker-class=gthread", \
      "--log-file=-", \
      "--timeout=600", \
      "-b", "0.0.0.0:80", "wsgi:app"]
