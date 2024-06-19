@@ -33,5 +33,6 @@ USER 405
 CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", \
      "--workers=1", "--threads=2", "--worker-class=gthread", \
      "--log-file=-", \
+     "-t=600" \
      "-b", "0.0.0.0:80", "wsgi:app"]
 
