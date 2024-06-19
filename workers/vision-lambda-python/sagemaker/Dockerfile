@@ -20,4 +20,4 @@ RUN pip3 install -r requirements.txt --target "${TASK_ROOT}"
 COPY app.py ${TASK_ROOT}
 
 # Run the Flask application
-ENTRYPOINT ["gunicorn", "-w", "5", "-b", "0.0.0.0:8080", "app:app"]
+ENTRYPOINT ["gunicorn", "-w", "1", "-b", "0.0.0.0:8080", "app:app"]
