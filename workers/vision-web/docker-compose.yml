@@ -7,6 +7,6 @@ services:
     env_file:
       - .env
     ports:
-      - 9000:80
+      - 9000:8080
     volumes:
       - ./src:/app/src
