@@ -36,7 +36,7 @@ def transformation():
 
     # Transform predictions to JSON
     result = {
-        'output': resp
+        'output': results
         }
 
     resultjson = json.dumps(result)
