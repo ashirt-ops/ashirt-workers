@@ -7,11 +7,11 @@ clean:
 .PHONY: build
 build: clean
 	pipenv requirements > requirements.txt
-	docker build -t $(image_name) .
+	podman build -t $(image_name) .
 
 .PHONY: run
 run:
-	docker run --rm --env-file ./.env -p 9000:8080 $(image_name)
+	podman run --rm --env-file ./.env -p 9000:8080 $(image_name)
 
 .PHONY: start-msg
 start-msg:
