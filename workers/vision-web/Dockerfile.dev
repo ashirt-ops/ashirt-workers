@@ -1,0 +1,30 @@
+FROM --platform=linux/amd64 python:3.12-slim
+
+# With help from https://pipenv.pypa.io/en/latest/basics/#pipenv-and-docker-containers
+
+WORKDIR /app
+ENV PIPENV_VENV_IN_PROJECT=1
+
+RUN pip install --user pipenv huggingface_hub
+# Download the required model components
+RUN /root/.local/bin/huggingface-cli download microsoft/Phi-3-vision-128k-instruct-onnx-cpu --include cpu-int4-rtn-block-32-acc-level-4/* --local-dir model/
+
+###################################
+# Install other dependencies here #
+###################################
+
+COPY Pipfile.lock Pipfile ./
+RUN /root/.local/bin/pipenv sync
+RUN /root/.local/bin/pipenv run pip install --pre onnxruntime-genai numpy
+
+ENV FLASK_APP src/wsgi.py
+ENV FLASK_DEBUG 1
+ENV FLASK_ENV=developement
+
+EXPOSE 8080
+
+COPY src ./src/
+
+CMD ["/root/.local/bin/pipenv", "run", \
+     "flask", "run", \
+     "--host=0.0.0.0", "--port=8080"]
