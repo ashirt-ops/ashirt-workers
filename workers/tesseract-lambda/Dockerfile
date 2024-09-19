@@ -3,7 +3,7 @@ FROM public.ecr.aws/lambda/nodejs:20
 # RUN yum update -y \
 #     && yum install -y tesseract-ocr
 
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
     && yum -y update \
     && yum -y groupinstall 'Development Tools' \
     && yum -y install tesseract python3

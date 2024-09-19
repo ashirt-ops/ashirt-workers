@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.9
 
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm \
     && yum update -y \
     && yum install -y \
     tesseract
