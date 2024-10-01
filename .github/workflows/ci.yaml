@@ -43,7 +43,7 @@ jobs:
 
       - name: Build and Push PR
         if: github.ref != 'refs/heads/main'
-        uses: docker/build-push-action@v6.7.0
+        uses: docker/build-push-action@v6.9.0
         with:
           context: workers/${{ matrix.service }}
           tags: ${{ steps.docker_meta.outputs.tags }}
@@ -53,7 +53,7 @@ jobs:
 
       - name: Build and Push Latest
         if: github.ref == 'refs/heads/main'
-        uses: docker/build-push-action@v6.7.0
+        uses: docker/build-push-action@v6.9.0
         with:
           context: workers/${{ matrix.service }}
           tags: ${{ steps.docker_meta.outputs.tags }}, ashirt/${{ matrix.service }}:latest #Add latest tag for main
