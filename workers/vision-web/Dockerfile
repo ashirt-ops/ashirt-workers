@@ -1,0 +1,37 @@
+FROM --platform=linux/amd64 python:3.12-slim AS builder
+
+WORKDIR /build
+
+COPY Pipfile.lock Pipfile ./
+RUN pip install --user pipenv
+RUN /root/.local/bin/pipenv requirements > requirements.txt
+###
+
+FROM --platform=linux/amd64 python:3.12-slim AS runner
+
+WORKDIR /app
+COPY --from=builder /build/requirements.txt .
+###################################
+# Install other dependencies here #
+###################################
+
+RUN pip install -r requirements.txt
+RUN pip install --pre onnxruntime-genai numpy huggingface_hub
+# Download the required model components
+RUN huggingface-cli download microsoft/Phi-3-vision-128k-instruct-onnx-cpu --include cpu-int4-rtn-block-32-acc-level-4/* --local-dir model/
+
+# COPY bin/docker_start.sh ./start.sh
+COPY src .
+
+EXPOSE 8080
+
+# Run as Alpine's guest user
+USER 405
+
+# some guidance on using gunicorn in containers:
+# https://pythonspeed.com/articles/gunicorn-in-docker/
+CMD ["gunicorn", "--worker-tmp-dir", "/dev/shm", \
+     "--workers=1", "--worker-class=gthread", \
+     "--log-file=-", \
+     "--timeout=600", \
+     "-b", "0.0.0.0:8080", "wsgi:app"]
