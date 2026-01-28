@@ -1,4 +1,4 @@
-version: '3'
+
 services:
   gcp-vision:
     build:
@@ -10,5 +10,4 @@ services:
       - 9000:8080
     volumes:
       - ./src:/app/src
-    networks:
-      - ashirt
+      - ./credentials.json:/credentials.json:ro

@@ -9,6 +9,7 @@ gunicorn = "*"
 requests = "*"
 structlog = "*"
 python-dotenv = "*"
+google-cloud-vision = "==3.12.0"
 
 [dev-packages]
 autopep8 = "*"
