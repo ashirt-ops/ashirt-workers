@@ -1,0 +1,13 @@
+
+services:
+  gcp-vision:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    env_file:
+      - .env
+    ports:
+      - 9000:8080
+    volumes:
+      - ./src:/app/src
+      - ./credentials.json:/credentials.json:ro

@@ -13,7 +13,7 @@ jobs:
     name: Build and Push
     strategy:
       matrix:
-        service: [tesseract-lambda-python,keyword-lambda-python,tesseract-web,tesseract-lambda]
+        service: [gcp-vision]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -31,25 +31,21 @@ jobs:
           flavor: |
             latest=false
       - name: Login to Docker Hub
+        if: github.ref == 'refs/heads/main'
         uses: docker/login-action@v3.7.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v3.12.0
 
-      - name: Build and Push PR
+      - name: Build PR (no push)
         if: github.ref != 'refs/heads/main'
         uses: docker/build-push-action@v6.18.0
         with:
           context: workers/${{ matrix.service }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
-          push: true # Push with pr-### and sha-xxxxxxx tags
+          # don't push because external PRs can't access secrets
+          push: false
 
       - name: Build and Push Latest
         if: github.ref == 'refs/heads/main'
@@ -58,5 +54,4 @@ jobs:
           context: workers/${{ matrix.service }}
           tags: ${{ steps.docker_meta.outputs.tags }}, ashirt/${{ matrix.service }}:latest #Add latest tag for main
           labels: ${{ steps.docker_meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64
           push: true

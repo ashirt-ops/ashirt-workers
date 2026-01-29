@@ -1,0 +1,9 @@
+# compiled output
+__pycache__
+
+# local env files
+.env*
+!.env.example
+
+
+*.json
