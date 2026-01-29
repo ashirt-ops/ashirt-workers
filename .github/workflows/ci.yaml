@@ -13,7 +13,7 @@ jobs:
     name: Build and Push
     strategy:
       matrix:
-        service: [tesseract-lambda-python,keyword-lambda-python,tesseract-web,tesseract-lambda]
+        service: [tesseract-lambda-python,keyword-lambda-python,tesseract-web,tesseract-lambda,gcp-vision]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
