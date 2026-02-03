@@ -11,11 +11,6 @@ def handle_evidence_created(body: EvidenceCreatedBody) -> ProcessResultDTO:
     """
     accepted_types = [
         SupportedContentType.IMAGE,
-        # SupportedContentType.CODEBLOCK,
-        # SupportedContentType.EVENT,
-        # SupportedContentType.HTTP_REQUEST_CYCLE,
-        # SupportedContentType.TERMINAL_RECORDING,
-        # SupportedContentType.NONE,
     ]
 
     if body.content_type in accepted_types:

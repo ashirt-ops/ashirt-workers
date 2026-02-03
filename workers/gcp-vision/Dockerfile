@@ -1,4 +1,4 @@
-FROM python:3.10-alpine AS builder
+FROM python:3.11-alpine AS builder
 
 WORKDIR /build
 RUN pip install --user pipenv
@@ -8,7 +8,7 @@ COPY Pipfile.lock Pipfile ./
 RUN /root/.local/bin/pipenv requirements > requirements.txt
 ###
 
-FROM python:3.10-alpine AS runner
+FROM python:3.11-alpine AS runner
 
 WORKDIR /app
 COPY --from=builder /build/requirements.txt .
