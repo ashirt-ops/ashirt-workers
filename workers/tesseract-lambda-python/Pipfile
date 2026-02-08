@@ -8,6 +8,7 @@ requests = "*"
 yake = "*"
 pytesseract = "*"
 langdetect = "*"
+urllib3 = "*"
 
 [dev-packages]
 

@@ -10,6 +10,7 @@ requests = "*"
 structlog = "*"
 python-dotenv = "*"
 google-cloud-vision = "==3.12.0"
+urllib3 = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -9,6 +9,7 @@ gunicorn = "*"
 requests = "*"
 structlog = "*"
 python-dotenv = "*"
+urllib3 = "*"
 
 [dev-packages]
 autopep8 = "*"
