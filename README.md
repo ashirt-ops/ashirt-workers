@@ -1,3 +1,9 @@
+# Maintenance Notice
+
+**NOTE: This repo is no longer maintained or suppported**
+
+If you are looking for one of the ocr workers you should instead opt for the new [ocr-worker](https://www.github.com/ashirt-ops/ocr-worker). This replaces all of the existing vision workers. Libraries for building workers in Go are in progress and will be released shortly. Going forward, this is the supported and recommended language/environment to build in. If someone would like to support other languages, we're open to chatting about it but can't dedicated the resources to supporting libraries for Go, Python, and Node.
+
 # ASHIRT Workers
 
 Adversary Simulators High-Fidelity Intelligence and Reporting Toolkit. This repo contains only the enhancement workers for ASHIRT. You can find the ASHIRT server [here](https://www.github.com/ashirt-ops/ashirt-server), and the client [here](https://www.github.com/ashirt-ops/ashirt).
